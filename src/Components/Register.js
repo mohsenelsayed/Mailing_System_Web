@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 const axios = require('axios');
 class Register extends Component{
     register = () => {
@@ -20,11 +21,12 @@ class Register extends Component{
 
     render(){
         return(
-            <div className="form">
+            <div className="form reg-form">
                 <label>Username:</label> <input type="text" name="username"/>
                 <label>Password: </label><input type="password" name="password"/>
                 <label>Confirm Password: </label><input type="password" name="cnfrmpassword"/>
                 <input className="submit" type="submit" value="Register" onClick={this.register}/>
+                <Link to="/login" className="enter-instead">Sign in</Link>
             </div>
         )
     }

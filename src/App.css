@@ -1,27 +1,44 @@
 body{
+  font-family: 'Open Sans', sans-serif;
   background-color: brown;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
+#root{
+  text-align: center;
+}
 a{
   color: white;
   text-decoration: none;
+}
+.st-a{
   font-size: 40px;
   background-color: rgb(196, 96, 66);
   padding: 20px 30px;
 }
 .home-button{
-    display: none;
-}
-.logout-button{
   position: absolute;
   top: 0;
   left: 0;
 }
-a:hover{
+.logout-button{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.st-a:hover{
   background-color: rgb(187, 85, 54);
+}
+.welcome-phrase{
+  color: white;
+  font-size: 50px;
+}
+.welcome-phrase span{
+  color: brown;
+  background-color: white;
+  padding: 0 5px;
 }
 .form{
   background-color: rgb(187, 85, 54);
@@ -43,4 +60,10 @@ a:hover{
 .form .submit{
   margin-top: 10px;
   cursor: pointer;
+}
+.fpw-form label{
+  margin-bottom: 30px;
+}
+.fpw-form a{
+  display: inline;
 }

@@ -14,6 +14,7 @@ App.use('/api/register', Reg);
 App.use('/home', Secured);
 App.post('/api/login' , async (req,res) => {
     let {username, password} = req.body;
+    console.log(req.body);
         await User.findOne({name: username}, (err,myUser) => {
             if(err || !myUser || myUser.password != password){
                 res.status(300).send("Wrong Credentials! Try again...");
@@ -32,7 +33,7 @@ App.post('/api/register', async (req,res) => {
         name: username,
         password: password
     })
-    const saveUser = await newUser.save();
+    await newUser.save();
     console.log("User registered: " + username);
     res.status(200).send("Registered Successfully!");
 })
