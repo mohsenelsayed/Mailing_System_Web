@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router,Route,Link,Switch} from 'react-router-dom';
-import loggedUserToken from './Login';
+import {Link} from 'react-router-dom';
 const axios = require('axios');
 
 export default class Home extends Component{
     constructor(props){
         super(props);
-        axios.post('/home', {"authorization": this.props.loggedUserToken
-    })
+        axios.post('/home', {"authorization": this.props.userData.token
+    }).catch(err => {})
+    }
+    logOut = () => {
+        this.props.userLoggedOut();
     }
     render(){
         if(this.props.loggedStatus){
             return(
                 <React.Fragment>
-                    <Link to="/" className="st-a logout-button">Logout</Link>
+                    <Link to="/" className="st-a logout-button" onClick={this.logOut}>Logout</Link>
                     <h1>Welcome to Homepage!</h1>
                 </React.Fragment>
             )

@@ -4,21 +4,36 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Forgotpw from './Components/Forgotpw';
+import Newpw from './Components/Newpw';
 import './App.css';
-import { render } from '@testing-library/react';
 
 export default class App extends Component{
   constructor(){
     super();
     this.state = {
       loggedIn: false,
-      loggedUserToken: undefined
+      userData: {
+        name: undefined,
+        token: undefined
+      }
     }
   }
-  userLogged = (userToken) => {
+  userLogged = (userData) => {
     this.setState({
       loggedIn: true,
-      loggedUserToken: userToken
+      userData: {
+        name: userData.username,
+        token: userData.usertoken
+      }
+    })
+  }
+  userLoggedOut = () => {
+    this.setState({
+      loggedIn: false,
+      userData: {
+        name: undefined,
+        token: undefined
+      }
     })
   }
 
@@ -40,10 +55,13 @@ export default class App extends Component{
               <Login userLogged={this.userLogged} />
             </Route>
             <Route exact path="/home" >
-              <Home loggedStatus={this.state.loggedIn} loggedUserToken= {this.state.loggedUserToken} />
+              <Home loggedStatus={this.state.loggedIn} userData={this.state.userData} userLoggedOut={this.userLoggedOut} />
             </Route>
             <Route exact path="/forgotpw" >
               <Forgotpw />
+            </Route>
+            <Route path="/newpassword/" >
+              <Newpw />
             </Route>
           </Switch>
         </Router>
