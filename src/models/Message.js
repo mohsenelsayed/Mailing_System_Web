@@ -10,6 +10,10 @@ const MessageSchema = mongoose.Schema({
     from: {
         type: String
     },
+    subject: {
+        type: String
+    }
+    ,
     content: {
         type: String
     }

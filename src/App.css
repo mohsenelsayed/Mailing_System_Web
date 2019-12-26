@@ -5,6 +5,7 @@ body{
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 #root{
   text-align: center;
@@ -51,7 +52,7 @@ a{
 .form label{
   font-size: 25px;
 }
-.form input{
+.form input, .form textarea{
   font-size: 20px;
   padding: 10px 40px;
   margin: 10px;
@@ -67,4 +68,58 @@ a{
 }
 .fpw-form span{
   color: white;
+}
+
+.sendMailWindow{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 250, 250, 0.5);
+}
+.sendMailForm{
+  width: 75vw;
+  height: 74vh;
+  flex-flow: column;
+  position: relative;
+  margin: 5vh auto;
+}
+.sendMailForm .row{
+  width: 100%;
+  display: flex;
+}
+.sendMailForm .row:last-child{
+  flex-direction: row-reverse;
+}
+.sendMailForm label{
+  flex: 1;
+  min-width: 17%;
+  text-align: right;
+}
+.sendMailForm input, .sendMailForm textarea{
+  margin-top: 0;
+  text-align: left;
+  flex: 5;
+  font-size: 16px;
+}
+.sendMailForm .msgContent{
+  height: 280px;
+}
+.sendMailForm .submit{
+  max-width: 70px;
+  padding: 5px 10px;
+  margin-top: 0;
+}
+.sendMailWindowClose{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color:rgb(162, 61, 30);
+  border: 0;
+  font-size: 20px;
+  padding: 5px 12px;
+  color:white;
+  border-radius: 50%;
+  cursor: pointer;
 }

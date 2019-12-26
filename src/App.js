@@ -14,6 +14,7 @@ export default class App extends Component{
       loggedIn: false,
       userData: {
         name: undefined,
+        email: undefined,
         token: undefined
       }
     }
@@ -23,15 +24,18 @@ export default class App extends Component{
       loggedIn: true,
       userData: {
         name: userData.username,
+        email: userData.email,
         token: userData.usertoken
       }
     })
+    console.log(`userData: ${JSON.stringify(this.state.userData)}`);
   }
   userLoggedOut = () => {
     this.setState({
       loggedIn: false,
       userData: {
         name: undefined,
+        email: undefined,
         token: undefined
       }
     })

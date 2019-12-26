@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 export default class Newpw extends Component {
+
+    componentDidMount() {
+        document.getElementsByClassName("form")[0].addEventListener("keydown", event => {
+            if(event.keyCode === 13){
+                document.getElementsByClassName("submit")[0].click();
+            }
+        })
+    }
+
     resetPassword = () => {
         let passwords = document.getElementsByClassName("npw-input");
         if(passwords[0].value && passwords[1].value && passwords[0].value === passwords[1].value){

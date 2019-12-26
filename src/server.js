@@ -8,13 +8,14 @@ const nodemailer = require('nodemailer');
 
 mongoose.connect('mongodb://localhost:27017/ratethem', {useNewUrlParser: true, useUnifiedTopology: true});
 
-function newMessage(to,from,content) {
+function newMessage(to,from,subject,content) {
     let MsgsCounter =  Message.where({}).countDocuments(async (err,count) => {
         if(err) return handleError(err);
         const newMessage = new Message({
             id: JSON.stringify(count),
             to,
             from,
+            subject,
             content
         })
         await newMessage.save();
@@ -62,6 +63,9 @@ App.use(bodyParser.urlencoded({ extended: true }));
 App.use('/api/login', Auth);
 App.use('/api/register', Reg);
 App.use('/home', Secured);
+
+
+
 App.post('/api/login' , async (req,res) => {
     let {username, password} = req.body;
     await User.findOne({name: username}, (err,myUser) => {
@@ -69,19 +73,40 @@ App.post('/api/login' , async (req,res) => {
             res.status(300).send("Wrong Credentials! Try again...");
         }else{
             jwt.sign({myUser}, 'usertoken', (err,usertoken) => {
-                res.set({"userToken": usertoken,"userdata": JSON.stringify(req.body)}).sendStatus(200);
+                res.set({"userToken": usertoken,"userdata": JSON.stringify(myUser)}).sendStatus(200);
             })
         }
     });
 })
+
 App.post('/api/register', async (req,res) => {
     let {username,email,password} = req.body;
-    newUser(username,email,password)
-    res.status(200).send("Registered Successfully!");
+    let usernameExists = false,emailExists = false;
+    await User.findOne({name: username}, (err,myUser) => {
+        if(myUser){
+            usernameExists = true;
+        }
+    })
+    await User.findOne({email}, (err,myUser) => {
+        if(myUser){
+            emailExists = true;
+        }
+    })
+    if(!usernameExists && !emailExists) {
+        newUser(username,email,password);
+        res.status(200).send("Registered Successfully!");
+    }else{
+        res.status(300).send("Email/Username already taken :(");
+    }
 })
 
 App.post('/home',(req,res) => {
     res.sendStatus(200);
+})
+
+App.post('/api/sendmsg', async (req,res) => {
+    newMessage(req.body.to, req.body.from, req.body.subject, req.body.content)
+    res.status(200).send("Message send successfully!");
 })
 
 

@@ -7,6 +7,13 @@ class Login extends Component{
     constructor(props){
         super();
     }
+    componentDidMount() {
+        document.getElementsByClassName("form")[0].addEventListener("keydown", event => {
+            if(event.keyCode === 13){
+                document.getElementsByClassName("submit")[0].click();
+            }
+        })
+    }
     onUserLogin = (userData) => {
         this.props.userLogged(userData);
     }
@@ -34,8 +41,8 @@ class Login extends Component{
                 <label>Username:</label> <input type="text" name="username" required/>
                 <label>Password: </label><input type="password" name="password" required/>
                 <input className="submit" type="submit" value="Login" onClick={this.login} required/>
-                <Link to="/forgotpw"><input className="submit" type="submit" value="Forgot password?" onClick={this.forgotpw} /> </Link>
-                <Link to="/register" className="enter-instead">Create new account</Link>
+                <Link to="/forgotpw"> Forgot password </Link>
+                <Link to="/register">Create new account</Link>
             </div>
         )
     }
