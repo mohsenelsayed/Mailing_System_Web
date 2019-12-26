@@ -14,8 +14,8 @@ class Login extends Component{
             }
         })
     }
-    onUserLogin = (userData) => {
-        this.props.userLogged(userData);
+    onUserLogin = (userData, token) => {
+        this.props.userLogged(userData, token);
     }
     login = () => {
         let inputs = document.getElementsByClassName("form")[0].getElementsByTagName("input");
@@ -25,7 +25,7 @@ class Login extends Component{
             password: inputs[1].value
           })
           .then( res => {
-            this.onUserLogin(JSON.parse(res.headers.userdata));
+            this.onUserLogin(res.data, res.headers.token);
             document.getElementsByClassName("home-button")[0].click();
           })
           .catch(error => {

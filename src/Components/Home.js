@@ -9,8 +9,7 @@ export default class Home extends Component{
             sendMailWindow: false
         }
         axios.post('/home', {"authorization": this.props.userData.token
-    }).catch(err => {})
-    console.log(`data: ${JSON.stringify(this.props)}`);
+    }).catch(err => {});
     }
 
     componentDidUpdate() {

@@ -19,16 +19,15 @@ export default class App extends Component{
       }
     }
   }
-  userLogged = (userData) => {
+  userLogged = (user, token) => {
     this.setState({
       loggedIn: true,
       userData: {
-        name: userData.username,
-        email: userData.email,
-        token: userData.usertoken
+        name: user.name,
+        email: user.email,
+        token
       }
     })
-    console.log(`userData: ${JSON.stringify(this.state.userData)}`);
   }
   userLoggedOut = () => {
     this.setState({
