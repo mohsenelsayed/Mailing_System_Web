@@ -68,12 +68,14 @@ App.use('/home', Secured);
 
 App.post('/api/login' , async (req,res) => {
     let {username, password} = req.body;
-    await User.findOne({name: username}, (err,myUser) => {
-        if(err || !myUser || myUser.password != password){
+    await User.findOne({name: username}, (err,userdata) => {
+        if(err || !userdata || userdata.password != password){
             res.status(300).send("Wrong Credentials! Try again...");
         }else{
-            jwt.sign({myUser}, 'usertoken', (err,usertoken) => {
-                res.set({"userToken": usertoken,"userdata": JSON.stringify(myUser)}).sendStatus(200);
+            jwt.sign({userdata}, 'usertoken', (err,usertoken) => {
+                res.set("token", usertoken);
+                res.send(userdata);
+                res.sendStatus(200);
             })
         }
     });
@@ -177,11 +179,7 @@ function Secured(req,res,next){
                 console.log("Wrong token");
                 res.sendStatus(403);
             }else{
-                console.log(`${JSON.stringify(data.myUser.name)} has logged in.`);
-                res.json({
-                    message: "Welcome to Homepage!",
-                    data
-                });
+                console.log(`${JSON.stringify(data.userdata.name)} has logged in.`);
             }
         })
         next();
