@@ -6,6 +6,15 @@ export default class Forgotpw extends Component {
     constructor(props){
         super();
     }
+
+    componentDidMount() {
+        document.getElementsByClassName("form")[0].addEventListener("keydown", event => {
+            if(event.keyCode === 13){
+                document.getElementsByClassName("submit")[0].click();
+            }
+        })
+    }
+
     sendEmail = () => {
         let email = document.getElementsByClassName("fpw-input")[0].value;
         let emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
