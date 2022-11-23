@@ -36,13 +36,13 @@ function sendEmail(to,subject,text){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-        user: 'moehackerone@gmail.com',
-        pass: 'moe7acker1'
+        user: 'Insert Email Here',
+        pass: 'Insert Password Here' //Sorry for this, too lazy to setup .env file hehe
         }
   });
   
   let mailOptions = {
-    from: 'moehackerone@gmail.com',
+    from: '',
     to,
     subject,
     text
